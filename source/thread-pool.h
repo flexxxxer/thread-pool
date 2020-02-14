@@ -7,9 +7,6 @@
 #include <functional>
 #include <future>
 
-using namespace std::chrono_literals;
-using namespace std;
-
 class thread_pool
 {
 private:
@@ -61,10 +58,10 @@ private:
 
 				// wait event after inserting to queue
 				pool->event_obj_.wait(locker, [pool]()
-					{
-						// if queue have items or pool is in destruction we exit from wait state
-						return pool->is_thread_pool_in_destruction_ || !pool->tasks_queue_.empty();
-					});
+				{
+					// if queue have items or pool is in destruction we exit from wait state
+					return pool->is_thread_pool_in_destruction_ || !pool->tasks_queue_.empty();
+				});
 
 				// if pool is in destruction leave end current thread
 				if (pool->is_thread_pool_in_destruction_)
@@ -139,12 +136,12 @@ public:
 
 			// add task do queue
 			this->tasks_queue_.emplace([task, launch_type, async_event_obj]()
-				{
-					(*task)(); // execute task
+			{
+				(*task)(); // execute task
 
-					if (launch_type == std::launch::async) // if something wait async
-						async_event_obj->notify_one(); // notify him
-				});
+				if (launch_type == std::launch::async) // if something wait async
+					async_event_obj->notify_one(); // notify him
+			});
 		}
 
 		// notify one thread
