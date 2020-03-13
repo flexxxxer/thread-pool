@@ -2,9 +2,9 @@
 
 This thread-pool implementation allows you to:
 - perform tasks without the cost of creating and destroying threads
-- allows you to perform tasks in different modes: asynchronous and deferred (parallel)
+- allows you to perform tasks in different modes: asynchronous and parallel
 - performing functions with any number of parameters
 
 Features:
 - pooling on first initialization (singleton)
-- **(in future)** auto resize when there are not enough threads to complete tasks
+- all tasks all tasks are performed on pool
