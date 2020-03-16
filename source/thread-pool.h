@@ -1,5 +1,6 @@
 #pragma once
 
+#include <atomic>
 #include <functional>
 #include <future>
 #include <mutex>
@@ -15,7 +16,7 @@ namespace threading
 	private:
 		std::condition_variable event_obj_;
 		std::mutex lock_mutex_;
-		bool is_thread_pool_in_destruction_ = false;
+		std::atomic<bool> is_thread_pool_in_destruction_ = false;
 
 		// fixed-size threads array
 		std::vector<std::thread> threads_;
